@@ -1,4 +1,4 @@
-import { addPhotos } from '../store/store';
+import { addPhotos } from '../store/store.js';
 
 export const fetchPhotos = (albumId) => {
   return (dispatch) => {

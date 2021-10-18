@@ -1,4 +1,4 @@
-import { addAlbums } from '../store/store';
+import { addAlbums } from '../store/store.js';
 
 export const fetchAlbums = () => {
   return (dispatch) => {

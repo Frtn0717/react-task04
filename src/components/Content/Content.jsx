@@ -5,7 +5,7 @@ import Photos from './Photos';
 import Albums from './Albums';
 
 const Content = () => {
-  const activeAlbum = useSelector((state) => state.activeAlbum);
+  const activeAlbum = useSelector(({ activeAlbum }) => activeAlbum);
 
   if (activeAlbum === null) {
     return <Albums />;

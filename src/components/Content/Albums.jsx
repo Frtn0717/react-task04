@@ -1,17 +1,21 @@
 import style from './content-style.module.scss';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { fetchAlbums } from '../../actions/fetch-albums';
 import { useDispatch, useSelector } from 'react-redux';
-import { addActiveAlbum } from '../../store/store';
+import { addActiveAlbum, addAlbums } from '../../store/store.js';
 
 const Albums = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return dispatch(fetchAlbums());
-  }, []);
+    dispatch(fetchAlbums());
+  }, [dispatch]);
 
-  const albums = useSelector((state) => state.albums);
+  const albums = useSelector(({ albums }) => albums);
+
+  const addItemToAlbum = useCallback(() => {
+    dispatch(addAlbums([{ userId: 21, id: 23, title: 'Waterfall' }])); // hardcoded album
+  }, [dispatch]);
 
   return (
     <section className={style.contentWrap}>
@@ -30,10 +34,7 @@ const Albums = () => {
           );
         })}
       </div>
-      <button
-        className={style.backBtn}
-        onClick={() => console.log('add album')}
-      >
+      <button className={style.backBtn} onClick={addItemToAlbum}>
         Add album
       </button>
     </section>

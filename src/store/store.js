@@ -9,7 +9,6 @@ const ADD_PHOTOS_TYPE = 'ADD_PHOTO_TYPE';
 const ADD_ACTIVE_ALBUM = 'ADD_ACTIVE_ALBUM';
 
 // Action creators
-
 export function addAlbums(payload) {
   return {
     type: ADD_ALBUMS_TYPE,
