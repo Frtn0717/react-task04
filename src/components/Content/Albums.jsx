@@ -1,8 +1,8 @@
 import style from './content-style.module.scss';
 import React, { useEffect } from 'react';
-import { fetchAlbums } from '../../requests/fetch-albums';
+import { fetchAlbums } from '../../actions/fetch-albums';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPhotos } from '../../requests/fetch-photos';
+import { addActiveAlbum } from '../../store/store';
 
 const Albums = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Albums = () => {
             <div
               key={album.id}
               className={style.albumItem}
-              onClick={() => dispatch(fetchPhotos(album.id))}
+              onClick={() => dispatch(addActiveAlbum(album))}
             >
               {album.title}
             </div>

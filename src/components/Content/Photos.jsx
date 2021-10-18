@@ -1,20 +1,28 @@
 import style from './photos-style.module.scss';
 import React, { useEffect } from 'react';
-import { fetchPhotos } from '../../requests/fetch-photos';
+import { fetchPhotos } from '../../actions/fetch-photos';
 import { useDispatch, useSelector } from 'react-redux';
+import { addActiveAlbum } from '../../store/store';
 
-const Photos = ({ album, setActiveAlbum }) => {
+const Photos = () => {
   const dispatch = useDispatch();
 
+  const activeAlbum = useSelector((state) => state.activeAlbum);
+
   useEffect(() => {
-    return dispatch(fetchPhotos());
-  }, []);
+    return dispatch(fetchPhotos(activeAlbum.id));
+  }, [activeAlbum]);
 
   const photos = useSelector((state) => state.photos);
 
+  // const batToAlbums = () => {
+  //   dispatch(addActiveAlbum(null));
+
+  // }
+
   return (
     <section className={style.contentWrap}>
-      <h3> {album.title.toUpperCase()} </h3>
+      <h3> {activeAlbum.title.toUpperCase()} </h3>
 
       <div className={style.photos}>
         {photos.map((photo) => {
@@ -26,7 +34,10 @@ const Photos = ({ album, setActiveAlbum }) => {
           );
         })}
       </div>
-      <button className={style.backBtn} onClick={() => setActiveAlbum(null)}>
+      <button
+        className={style.backBtn}
+        onClick={() => dispatch(addActiveAlbum(null))}
+      >
         Back
       </button>
       <button

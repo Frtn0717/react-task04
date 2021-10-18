@@ -6,12 +6,20 @@ import thunk from 'redux-thunk';
 const SHOW_USER_TYPE = 'SHOW_USER_TYPE';
 const ADD_ALBUMS_TYPE = 'ADD_ALBUM_TYPE';
 const ADD_PHOTOS_TYPE = 'ADD_PHOTO_TYPE';
+const ADD_ACTIVE_ALBUM = 'ADD_ACTIVE_ALBUM';
 
 // Action creators
 
 export function addAlbums(payload) {
   return {
     type: ADD_ALBUMS_TYPE,
+    payload,
+  };
+}
+
+export function addActiveAlbum(payload) {
+  return {
+    type: ADD_ACTIVE_ALBUM,
     payload,
   };
 }
@@ -52,6 +60,7 @@ const awesomeUser = {
 const initialState = {
   user: [awesomeUser],
   albums: [],
+  activeAlbum: null,
   photos: [],
 };
 
@@ -74,6 +83,15 @@ function albums(state = initialState.albums, action) {
   }
 }
 
+function activeAlbum(state = initialState.activeAlbum, action) {
+  switch (action.type) {
+    case ADD_ACTIVE_ALBUM:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 function photos(state = initialState.photos, action) {
   switch (action.type) {
     case ADD_PHOTOS_TYPE:
@@ -86,6 +104,7 @@ function photos(state = initialState.photos, action) {
 export const allReducers = combineReducers({
   user,
   albums,
+  activeAlbum,
   photos,
 });
 
