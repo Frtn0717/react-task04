@@ -6,12 +6,13 @@ import { addActiveAlbum, addAlbums } from '../../store/store.js';
 
 const Albums = () => {
   const dispatch = useDispatch();
+  const albums = useSelector(({ albums }) => albums);
 
   useEffect(() => {
-    dispatch(fetchAlbums());
-  }, [dispatch]);
-
-  const albums = useSelector(({ albums }) => albums);
+    if (albums.length === 0) {
+      dispatch(fetchAlbums());
+    }
+  }, [dispatch, albums]);
 
   const addItemToAlbum = useCallback(() => {
     dispatch(addAlbums([{ userId: 21, id: 23, title: 'Waterfall' }])); // hardcoded album

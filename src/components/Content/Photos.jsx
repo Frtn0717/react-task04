@@ -8,12 +8,13 @@ const Photos = () => {
   const dispatch = useDispatch();
 
   const activeAlbum = useSelector(({ activeAlbum }) => activeAlbum);
+  const photos = useSelector(({ photos }) => photos);
 
   useEffect(() => {
-    return dispatch(fetchPhotos(activeAlbum.id));
-  }, [dispatch, activeAlbum.id]);
-
-  const photos = useSelector(({ photos }) => photos);
+    if (photos.length === 0) {
+      dispatch(fetchPhotos(activeAlbum.id));
+    }
+  }, [dispatch, activeAlbum.id, photos]);
 
   const backToAlbums = useCallback(() => {
     dispatch(addActiveAlbum(null));
