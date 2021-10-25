@@ -17,6 +17,16 @@ const Albums = () => {
     dispatch(addAlbums([{ userId: 21, id: 23, title: 'Waterfall' }])); // hardcoded album
   }, [dispatch]);
 
+  let id = 1;
+
+  function makeId() {
+    return () => {
+      return id++;
+    };
+  }
+
+  const currentId = makeId();
+
   return (
     <section className={style.contentWrap}>
       <h3> Albums </h3>
@@ -25,7 +35,7 @@ const Albums = () => {
         {albums.map((album) => {
           return (
             <div
-              key={album.id}
+              key={currentId()}
               className={style.albumItem}
               onClick={() => dispatch(addActiveAlbum(album))}
             >

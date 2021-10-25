@@ -34,6 +34,16 @@ const Photos = () => {
     );
   };
 
+  let id = 1;
+
+  function makeId() {
+    return () => {
+      return id++;
+    };
+  }
+
+  const currentId = makeId();
+
   return (
     <section className={style.contentWrap}>
       <h3> {activeAlbum.title.toUpperCase()} </h3>
@@ -41,7 +51,7 @@ const Photos = () => {
       <div className={style.photos}>
         {photos.map((photo) => {
           return (
-            <div key={photo.id} className={style.photosItem}>
+            <div key={currentId()} className={style.photosItem}>
               <img src={photo.thumbnailUrl} alt={photo.title}></img>
               <span>{photo.id}</span>
             </div>
