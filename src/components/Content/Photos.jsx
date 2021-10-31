@@ -2,7 +2,7 @@ import style from './photos-style.module.scss';
 import React, { useEffect, useCallback } from 'react';
 import { fetchPhotos } from '../../actions/fetch-photos';
 import { useDispatch, useSelector } from 'react-redux';
-import { addActiveAlbum, addPhotos } from '../../store/store.js';
+import { addActiveAlbum, addPhotos, clearPhotos } from '../../store/store.js';
 
 const Photos = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const Photos = () => {
 
   const backToAlbums = useCallback(() => {
     dispatch(addActiveAlbum(null));
+    dispatch(clearPhotos([]));
   }, [dispatch]);
 
   const addItemToPhoto = () => {
